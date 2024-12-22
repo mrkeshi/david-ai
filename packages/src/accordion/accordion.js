@@ -123,6 +123,16 @@ export function initAccordion() {
   });
 }
 
+// Function to cleanup accordion functionality
+export function cleanupAccordion() {
+  document.querySelectorAll("[data-dui-accordion-toggle]").forEach(button => {
+    if (initializedAccordionElements.has(button)) {
+      button.removeEventListener("click", toggleAccordion);
+      initializedAccordionElements.delete(button);
+    }
+  });
+}
+
 // Make toggleAccordionById available globally
 if (typeof window !== "undefined") {
   window.toggleAccordionById = toggleAccordionById;
