@@ -9,9 +9,10 @@ const pkg = JSON.parse(readFileSync('./package.json'));
 
 const copyrightBanner = `
 /*!
- * David AI JavaScript Library v${pkg.version}
+ * David AI JavaScript/TypeScript Library v${pkg.version}
  * (c) ${new Date().getFullYear()} David AI - Creative Tim
  * Released under the MIT License.
+ * Written in TypeScript, usable in both JavaScript and TypeScript projects.
  */
 `;
 
