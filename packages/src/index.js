@@ -8,7 +8,7 @@ import { initAlert } from './alert/alert.js';
 import { initCollapse } from './collapse/collapse.js';
 import { initTabs, cleanupTabs } from './tabs/tabs.js';
 import { initModal, cleanupModals } from './modal/modal.js';
-import { initAccordion } from './accordion/accordion.js';
+import { initAccordion, cleanupAccordion } from './accordion/accordion.js';
 import { initStepper, cleanupStepper } from './stepper/stepper.js';
 
 // Export individual components for named imports
@@ -26,6 +26,7 @@ export {
   initModal,
   cleanupModals,
   initAccordion,
+  cleanupAccordion,
   initStepper,
   cleanupStepper,
 };
@@ -45,6 +46,7 @@ const DavidAI = {
   initModal,
   cleanupModals,
   initAccordion,
+  cleanupAccordion,
   initStepper,
   cleanupStepper,
 };
