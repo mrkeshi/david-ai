@@ -6,9 +6,11 @@ import terser from '@rollup/plugin-terser';
 const inputFile = 'src/index.js'; // Entry file
 const outputDir = 'dist'; // Output directory
 
+import pkg from './package.json';
+
 const copyrightBanner = `
 /*!
- * David AI JavaScript Library
+ * David AI JavaScript Library v${pkg.version}
  * (c) ${new Date().getFullYear()} David AI - Creative Tim
  * Released under the MIT License.
  */
