@@ -9,6 +9,7 @@ import { initCollapse } from './collapse/collapse.js';
 import { initTabs, cleanupTabs } from './tabs/tabs.js';
 import { initModal, cleanupModals } from './modal/modal.js';
 import { initAccordion } from './accordion/accordion.js';
+import { initStepper, cleanupStepper } from './stepper/stepper.js';
 
 // Export individual components for named imports
 export {
@@ -25,6 +26,8 @@ export {
   initModal,
   cleanupModals,
   initAccordion,
+  initStepper,
+  cleanupStepper,
 };
 
 // Combine all features into a global object
@@ -42,6 +45,8 @@ const DavidAI = {
   initModal,
   cleanupModals,
   initAccordion,
+  initStepper,
+  cleanupStepper,
 };
 
 // **Global Initialization Function**
@@ -52,6 +57,7 @@ export function initDavidAI() {
   initTabs();
   initModal();
   initAccordion();
+  initStepper();
   // Load Popper.js once, then initialize Popper-dependent components
   loadPopperJs()
     .then(() => {
@@ -75,6 +81,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
       initAlert();
       initCollapse();
       initAccordion();
+      initStepper();
       initTabs();
       initModal();
       initDropdowns();
