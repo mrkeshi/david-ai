@@ -4,6 +4,16 @@ import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import { resolve as resolveTslib } from 'path'; // Used to resolve tslib paths
+import { readFileSync } from 'fs';
+const pkg = JSON.parse(readFileSync('./package.json'));
+
+const copyrightBanner = `
+/*!
+ * David AI JavaScript Library v${pkg.version}
+ * (c) ${new Date().getFullYear()} David AI - Creative Tim
+ * Released under the MIT License.
+ */
+`;
 
 const tslibPath = resolveTslib('node_modules/tslib/tslib.es6.js');
 
@@ -20,6 +30,7 @@ export default [
       name: 'DavidAI', // Global variable for browsers
       exports: 'named', // Ensure named exports
       sourcemap: true,
+      banner: copyrightBanner,
     },
     plugins: [
       resolve(),
@@ -43,6 +54,7 @@ export default [
       name: 'DavidAI',
       exports: 'named',
       sourcemap: true,
+      banner: copyrightBanner,
     },
     plugins: [
       resolve(),
@@ -65,6 +77,7 @@ export default [
       file: `${outputDir}/david-ai.esm.js`,
       format: 'esm', // ES module format
       sourcemap: true,
+      banner: copyrightBanner,
     },
     plugins: [
       resolve(),
