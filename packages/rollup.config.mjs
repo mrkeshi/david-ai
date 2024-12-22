@@ -2,8 +2,12 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
+import typescript from '@rollup/plugin-typescript';
+import { resolve as resolveTslib } from 'path'; // Used to resolve tslib paths
 
-const inputFile = 'src/index.js'; // Entry file
+const tslibPath = resolveTslib('node_modules/tslib/tslib.es6.js');
+
+const inputFile = 'src/index.ts'; // Entry file
 const outputDir = 'dist'; // Output directory
 
 export default [
@@ -20,9 +24,13 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        tslib: tslibPath,
+      }),
       babel({
         babelHelpers: 'bundled',
-        presets: ['@babel/preset-env'],
+        presets: ['@babel/preset-env', '@babel/preset-typescript'],
       }),
     ],
   },
@@ -39,9 +47,13 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        tslib: tslibPath,
+      }),
       babel({
         babelHelpers: 'bundled',
-        presets: ['@babel/preset-env'],
+        presets: ['@babel/preset-env', '@babel/preset-typescript'],
       }),
       terser(), // Minify the output
     ],
@@ -57,9 +69,13 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        tslib: tslibPath,
+      }),
       babel({
         babelHelpers: 'bundled',
-        presets: ['@babel/preset-env'],
+        presets: ['@babel/preset-env', '@babel/preset-typescript'],
       }),
     ],
   },
