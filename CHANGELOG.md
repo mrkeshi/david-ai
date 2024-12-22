@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.0.5] 2024-12-23
+
+### Added for NPM
+
+- Added new functions for Accordion and Stepper
+- Added cleanup functions for Accordion and Stepper
+
 ## [1.0.4] 2024-12-19
 
 ### Added for NPM
