@@ -1,3 +1,10 @@
+
+/*!
+ * David AI JavaScript Library v1.0.5
+ * (c) 2024 David AI - Creative Tim
+ * Released under the MIT License.
+ */
+
 function asyncGeneratorStep(n, t, e, r, o, a, c) {
   try {
     var i = n[a](c),
@@ -1194,6 +1201,247 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   });
 }
 
+// Accordion Component
+var initializedAccordionElements = new WeakSet();
+
+// Helper function to handle icons
+var handleIcons = function handleIcons(button, isExpanded) {
+  var isRotating = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var openIcon = button.querySelector("[data-dui-accordion-icon-open]");
+  var closeIcon = button.querySelector("[data-dui-accordion-icon-close]");
+  var rotatingIcon = button.querySelector("[data-dui-accordion-icon]");
+  if (openIcon && closeIcon) {
+    openIcon.style.display = isExpanded ? "block" : "none";
+    closeIcon.style.display = isExpanded ? "none" : "block";
+  }
+  if (rotatingIcon) {
+    rotatingIcon.classList.toggle("rotate-180", isRotating ? isExpanded : !isExpanded);
+  }
+};
+
+// Helper function to toggle accordion state
+var toggleAccordionState = function toggleAccordionState(targetElement, button, isExpanded) {
+  targetElement.style.maxHeight = isExpanded ? targetElement.scrollHeight + "px" : "0";
+  button.setAttribute("aria-expanded", isExpanded);
+  handleIcons(button, isExpanded);
+};
+
+// Function to toggle accordion items
+function toggleAccordion(event) {
+  if (event.currentTarget.getAttribute("aria-disabled") === "true") return;
+  var targetID = event.currentTarget.getAttribute("data-dui-accordion-target");
+  var parentElement = event.currentTarget.closest("[data-dui-accordion-container]");
+  var mode = parentElement === null || parentElement === void 0 ? void 0 : parentElement.getAttribute("data-dui-accordion-mode");
+  if (targetID !== null && targetID !== void 0 && targetID.startsWith("#")) {
+    var targetElement = document.querySelector(targetID);
+    var isExpanded = event.currentTarget.getAttribute("aria-expanded") === "true";
+    if (mode === "exclusive" && parentElement) {
+      parentElement.querySelectorAll("[data-dui-accordion-toggle]").forEach(function (button) {
+        var otherTargetID = button.getAttribute("data-dui-accordion-target");
+        if (otherTargetID !== targetID) {
+          var otherElement = document.querySelector(otherTargetID);
+          if (otherElement) {
+            toggleAccordionState(otherElement, button, false);
+          }
+        }
+      });
+    }
+    if (targetElement) {
+      toggleAccordionState(targetElement, event.currentTarget, !isExpanded);
+    }
+  }
+}
+
+// Function to manually toggle accordion item by ID
+function toggleAccordionById(targetId) {
+  targetId = targetId.startsWith('#') ? targetId : '#' + targetId;
+  var targetElement = document.querySelector(targetId);
+  var toggleButton = document.querySelector("[data-dui-accordion-target=\"".concat(targetId, "\"]"));
+  if ((toggleButton === null || toggleButton === void 0 ? void 0 : toggleButton.getAttribute("aria-disabled")) === "true" || !targetElement || !toggleButton) return;
+  var isExpanded = toggleButton.getAttribute("aria-expanded") === "true";
+  var parentElement = toggleButton.closest("[data-dui-accordion-container]");
+  var mode = parentElement === null || parentElement === void 0 ? void 0 : parentElement.getAttribute("data-dui-accordion-mode");
+  if (mode === "exclusive" && parentElement) {
+    parentElement.querySelectorAll("[data-dui-accordion-toggle]").forEach(function (button) {
+      var otherTargetID = button.getAttribute("data-dui-accordion-target");
+      if (otherTargetID !== targetId) {
+        var otherElement = document.querySelector(otherTargetID);
+        if (otherElement) {
+          toggleAccordionState(otherElement, button, false);
+        }
+      }
+    });
+  }
+  toggleAccordionState(targetElement, toggleButton, !isExpanded);
+}
+
+// Function to initialize accordion functionality
+function initAccordion() {
+  document.querySelectorAll("[data-dui-accordion-toggle]").forEach(function (button) {
+    if (!initializedAccordionElements.has(button)) {
+      button.addEventListener("click", toggleAccordion);
+      initializedAccordionElements.add(button);
+      var targetElement = document.querySelector(button.getAttribute("data-dui-accordion-target"));
+      var isExpanded = button.getAttribute("aria-expanded") === "true";
+      if (targetElement) {
+        toggleAccordionState(targetElement, button, isExpanded);
+      }
+    }
+  });
+  document.querySelectorAll("[data-dui-accordion-container]").forEach(function (container) {
+    var mode = container.getAttribute("data-dui-accordion-mode");
+    var buttons = container.querySelectorAll("[data-dui-accordion-toggle]");
+    if (mode === "exclusive") {
+      var expandedButtons = Array.from(buttons).filter(function (btn) {
+        return btn.getAttribute("aria-expanded") === "true";
+      });
+      expandedButtons.slice(1).forEach(function (button) {
+        var targetElement = document.querySelector(button.getAttribute("data-dui-accordion-target"));
+        if (targetElement) {
+          toggleAccordionState(targetElement, button, false);
+        }
+      });
+    } else if (mode === "all-open") {
+      buttons.forEach(function (button) {
+        var targetElement = document.querySelector(button.getAttribute("data-dui-accordion-target"));
+        if (targetElement) {
+          toggleAccordionState(targetElement, button, true);
+        }
+      });
+    }
+  });
+}
+
+// Function to cleanup accordion functionality
+function cleanupAccordions() {
+  document.querySelectorAll("[data-dui-accordion-toggle]").forEach(function (button) {
+    if (initializedAccordionElements.has(button)) {
+      button.removeEventListener("click", toggleAccordion);
+      initializedAccordionElements["delete"](button);
+    }
+  });
+}
+
+// Make toggleAccordionById available globally
+if (typeof window !== "undefined") {
+  window.toggleAccordionById = toggleAccordionById;
+  document.addEventListener("DOMContentLoaded", function () {
+    initAccordion();
+    new MutationObserver(initAccordion).observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  });
+}
+
+// Stepper Component
+var initializedStepperElements = new WeakSet();
+function updateStepperState(container) {
+  var steps = container.querySelectorAll("[data-step]");
+  var stepContents = container.querySelectorAll("[data-step-content]");
+  var prevButtons = container.querySelectorAll("[data-stepper-prev]");
+  var nextButtons = container.querySelectorAll("[data-stepper-next]");
+  var currentStep = parseInt(container.dataset.currentStep || "1", 10);
+  function updateState() {
+    // Update step circles and connector lines
+    steps.forEach(function (step, index) {
+      var stepNumber = index + 1;
+      step.dataset.active = stepNumber === currentStep;
+      step.dataset.completed = stepNumber < currentStep;
+      step.setAttribute("aria-disabled", stepNumber > currentStep);
+    });
+
+    // Update step content visibility
+    stepContents.forEach(function (content) {
+      var contentStep = parseInt(content.dataset.stepContent, 10);
+      if (contentStep === currentStep) {
+        content.classList.remove("hidden");
+      } else {
+        content.classList.add("hidden");
+      }
+    });
+
+    // Enable/disable buttons based on step
+    prevButtons.forEach(function (button) {
+      button.disabled = currentStep === 1;
+    });
+    nextButtons.forEach(function (button) {
+      button.disabled = currentStep === steps.length;
+    });
+  }
+
+  // Event listeners for buttons
+  function onNextButtonClick() {
+    if (currentStep < steps.length) {
+      currentStep++;
+      container.dataset.currentStep = currentStep;
+      updateState();
+    }
+  }
+  function onPrevButtonClick() {
+    if (currentStep > 1) {
+      currentStep--;
+      container.dataset.currentStep = currentStep;
+      updateState();
+    }
+  }
+  nextButtons.forEach(function (button) {
+    button.addEventListener("click", onNextButtonClick);
+  });
+  prevButtons.forEach(function (button) {
+    button.addEventListener("click", onPrevButtonClick);
+  });
+
+  // Store references to cleanup
+  container.__stepperCleanup = function () {
+    nextButtons.forEach(function (button) {
+      button.removeEventListener("click", onNextButtonClick);
+    });
+    prevButtons.forEach(function (button) {
+      button.removeEventListener("click", onPrevButtonClick);
+    });
+  };
+
+  // Initialize the state
+  updateState();
+}
+
+// Function to initialize all steppers
+function initStepper() {
+  document.querySelectorAll("[data-stepper-container]").forEach(function (container) {
+    if (!initializedStepperElements.has(container)) {
+      initializedStepperElements.add(container);
+
+      // Set initial step based on attribute
+      var initialStep = parseInt(container.getAttribute("data-initial-step") || "1", 10);
+      container.dataset.currentStep = initialStep;
+      updateStepperState(container);
+    }
+  });
+}
+
+// Cleanup function to remove all steppers
+function cleanupSteppers() {
+  document.querySelectorAll("[data-stepper-container]").forEach(function (container) {
+    if (container.__stepperCleanup) {
+      container.__stepperCleanup();
+      delete container.__stepperCleanup;
+    }
+    initializedStepperElements["delete"](container);
+  });
+}
+
+// Auto-initialize steppers on DOMContentLoaded and observe dynamically added elements
+if (typeof window !== "undefined") {
+  document.addEventListener("DOMContentLoaded", function () {
+    initStepper();
+    new MutationObserver(initStepper).observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  });
+}
+
 // Combine all features into a global object
 var DavidAI = {
   initAlert: initAlert,
@@ -1207,7 +1455,11 @@ var DavidAI = {
   initTabs: initTabs,
   cleanupTabs: cleanupTabs,
   initModal: initModal,
-  cleanupModals: cleanupModals
+  cleanupModals: cleanupModals,
+  initAccordion: initAccordion,
+  cleanupAccordions: cleanupAccordions,
+  initStepper: initStepper,
+  cleanupSteppers: cleanupSteppers
 };
 
 // **Global Initialization Function**
@@ -1217,7 +1469,8 @@ function initDavidAI() {
   initCollapse();
   initTabs();
   initModal();
-
+  initAccordion();
+  initStepper();
   // Load Popper.js once, then initialize Popper-dependent components
   loadPopperJs().then(function () {
     initDropdowns();
@@ -1238,6 +1491,8 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
     var observer = new MutationObserver(function () {
       initAlert();
       initCollapse();
+      initAccordion();
+      initStepper();
       initTabs();
       initModal();
       initDropdowns();
@@ -1259,5 +1514,5 @@ var index = _objectSpread2(_objectSpread2({}, DavidAI), {}, {
   initDavidAI: initDavidAI
 });
 
-export { cleanupDropdowns, cleanupModals, cleanupPopovers, cleanupTabs, cleanupTooltips, index as default, initAlert, initCollapse, initDavidAI, initDropdowns, initModal, initPopovers, initTabs, initTooltips };
+export { cleanupAccordions, cleanupDropdowns, cleanupModals, cleanupPopovers, cleanupSteppers, cleanupTabs, cleanupTooltips, index as default, initAccordion, initAlert, initCollapse, initDavidAI, initDropdowns, initModal, initPopovers, initStepper, initTabs, initTooltips };
 //# sourceMappingURL=david-ai.esm.js.map
