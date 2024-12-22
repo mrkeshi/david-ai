@@ -93,7 +93,7 @@ export function initStepper() {
 }
 
 // Cleanup function to remove all steppers
-export function cleanupStepper() {
+export function cleanupSteppers() {
   document.querySelectorAll("[data-stepper-container]").forEach((container) => {
     if (container.__stepperCleanup) {
       container.__stepperCleanup();
