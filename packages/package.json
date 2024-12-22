@@ -6,6 +6,7 @@
   "module": "dist/david-ai.esm.js",
   "browser": "dist/david-ai.js",
   "unpkg": "dist/david-ai.min.js",
+  "types": "dist/types/index.d.ts",
   "type": "module",
   "exports": {
     "import": "./dist/david-ai.esm.js",
@@ -46,10 +47,17 @@
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
+    "@babel/preset-typescript": "^7.26.0",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-terser": "^0.4.3",
-    "rollup": "^3.25.1"
+    "@rollup/plugin-typescript": "^12.1.2",
+    "rollup": "^3.25.1",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "tslib": "^2.8.1"
   }
 }
