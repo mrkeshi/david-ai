@@ -6,6 +6,10 @@ prev: docs/react/inputs
 next: docs/react/Stepper-group
 ---
 
+<ScriptLoader />
+
+<InfoBadge />
+
 # Tailwind CSS Stepper
 
 Guide users through multi-step workflows with the stepper component from David UI. Styled with Tailwind CSS, it’s ideal for forms, tutorials, or processes. 
@@ -53,3 +57,101 @@ This stepper pairs each step with additional content such as a title and descrip
 A customizable stepper with a unique style, including rounded edges and tailored colors, offering a modern look to fit diverse design requirements.
 
 <PreviewWithCode relativePath="stepper/stepper-custom-styles.tsx" language="html" />
+
+---
+
+## Required Script
+
+The Stepper component in david-ai requires JavaScript to handle the step functionality. The library provides smooth transitions and navigation behavior through data attributes.
+
+### Installation
+
+To use the Stepper component in your project, you first need to install the `david-ai` library via npm:
+
+<CodePreviewTailwindClasses codeSnippet={`npm install david-ai`}/>
+
+### Basic Usage
+
+<CodePreviewTailwindClasses codeSnippet={
+`import { initStepper } from 'david-ai';
+
+// Initialize stepper functionality
+initStepper();
+`
+}/>
+
+### Using with Global Access
+If you prefer, you can use the DavidAI global object instead of directly importing initStepper:
+
+<CodePreviewTailwindClasses codeSnippet={
+`import * as DavidAI from 'david-ai';
+
+// Initialize stepper functionality
+DavidAI.initStepper();
+`
+}/>
+
+### Using with CDN
+You can include david-ai via a CDN and initialize stepper functionality globally in the browser. Add the following script to your HTML file:
+
+<CodePreviewTailwindClasses codeSnippet={`<script src="https://cdn.jsdelivr.net/gh/creativetimofficial/david-ai@1.0.4/packages/dist/david-ai.min.js" defer></script>`}/>
+
+### HTML Code Example
+
+<CodePreviewTailwindClasses codeSnippet={
+`<div data-stepper-container data-initial-step="1" class="w-full">
+    <div class="flex w-full items-center justify-between">
+      <div aria-disabled="false" data-step class="group w-full flex items-center">
+        <div class="relative">
+          <span class="relative grid h-10 w-10 place-items-center rounded-full bg-stone-200 group-data-[active=true]:bg-stone-800 group-data-[active=true]:text-white group-data-[completed=true]:bg-stone-800 group-data-[completed=true]:text-white">
+            1
+          </span>
+        </div>
+        <div class="flex-1 h-1 bg-stone-200 group-data-[completed=true]:bg-stone-800"></div>
+      </div>
+      <div aria-disabled="true" data-step class="group w-full flex items-center">
+        <div class="relative">
+          <span class="relative grid h-10 w-10 place-items-center rounded-full bg-stone-200 group-data-[active=true]:bg-stone-800 group-data-[active=true]:text-white group-data-[completed=true]:bg-stone-800 group-data-[completed=true]:text-white">
+            2
+          </span>
+        </div>
+        <div class="flex-1 h-1 bg-stone-200 group-data-[completed=true]:bg-stone-800"></div>
+      </div>
+      <div aria-disabled="true" data-step class="group flex items-center">
+        <div class="relative">
+          <span class="relative grid h-10 w-10 place-items-center rounded-full bg-stone-200 group-data-[active=true]:bg-stone-800 group-data-[active=true]:text-white group-data-[completed=true]:bg-stone-800 group-data-[completed=true]:text-white">
+            3
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <div data-step-content="1" class="step-content hidden">
+        <h3 class="text-xl font-semibold mb-4">Step 1 Content</h3>
+        <p class="text-stone-500">This is the content for step 1. Add whatever content you need here.</p>
+      </div>
+      <div data-step-content="2" class="step-content">
+        <h3 class="text-xl font-semibold mb-4">Step 2 Content</h3>
+        <p class="text-stone-500">This is the content for step 2. Add whatever content you need here.</p>
+      </div>
+      <div data-step-content="3" class="step-content hidden">
+        <h3 class="text-xl font-semibold mb-4">Step 3 Content</h3>
+        <p class="text-stone-500">This is the content for step 3. Add whatever content you need here.</p>
+      </div>
+    </div>
+
+    <div class="mt-6 flex w-full justify-between gap-4"> 
+      <button 
+        data-stepper-prev 
+        class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased">
+        Previous
+      </button>
+      <button 
+        data-stepper-next 
+        class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased">
+        Next
+      </button>
+    </div>
+  </div>`
+}/>
