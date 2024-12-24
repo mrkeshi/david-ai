@@ -6,6 +6,18 @@ import terser from '@rollup/plugin-terser';
 const inputFile = 'src/index.js'; // Entry file
 const outputDir = 'dist'; // Output directory
 
+import { readFileSync } from 'fs';
+
+const pkg = JSON.parse(readFileSync('./package.json'));
+
+const copyrightBanner = `
+/*!
+ * David AI JavaScript Library v${pkg.version}
+ * (c) ${new Date().getFullYear()} David AI - Creative Tim
+ * Released under the MIT License.
+ */
+`;
+
 export default [
   // UMD Build (Non-minified)
   {
@@ -16,6 +28,7 @@ export default [
       name: 'DavidAI', // Global variable for browsers
       exports: 'named', // Ensure named exports
       sourcemap: true,
+      banner: copyrightBanner,
     },
     plugins: [
       resolve(),
@@ -35,6 +48,7 @@ export default [
       name: 'DavidAI',
       exports: 'named',
       sourcemap: true,
+      banner: copyrightBanner,
     },
     plugins: [
       resolve(),
@@ -53,6 +67,7 @@ export default [
       file: `${outputDir}/david-ai.esm.js`,
       format: 'esm', // ES module format
       sourcemap: true,
+      banner: copyrightBanner,
     },
     plugins: [
       resolve(),
