@@ -906,7 +906,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
 }
 
 // Alert component
-var initializedElements$1 = new WeakSet();
+var initializedElements$2 = new WeakSet();
 function closeAlert(event) {
   var button = event.currentTarget;
   var alert = button.closest('[role="alert"]');
@@ -916,9 +916,9 @@ function closeAlert(event) {
 }
 function initAlert() {
   document.querySelectorAll("[data-dui-dismiss='alert']").forEach(function (button) {
-    if (!initializedElements$1.has(button)) {
+    if (!initializedElements$2.has(button)) {
       button.addEventListener("click", closeAlert);
-      initializedElements$1.add(button);
+      initializedElements$2.add(button);
     }
   });
 }
@@ -940,7 +940,7 @@ if (typeof window !== "undefined") {
 }
 
 // Collapse component
-var initializedElements = new WeakSet();
+var initializedElements$1 = new WeakSet();
 function toggleCollapse(event) {
   var collapseID = event.currentTarget.getAttribute("data-dui-target");
   if (collapseID && collapseID.startsWith("#")) {
@@ -963,9 +963,9 @@ function toggleCollapse(event) {
 }
 function initCollapse() {
   document.querySelectorAll("[data-dui-toggle='collapse']").forEach(function (button) {
-    if (!initializedElements.has(button)) {
+    if (!initializedElements$1.has(button)) {
       button.addEventListener("click", toggleCollapse);
-      initializedElements.add(button); // Mark as initialized
+      initializedElements$1.add(button); // Mark as initialized
     }
   });
 }
@@ -1442,6 +1442,55 @@ if (typeof window !== "undefined") {
   });
 }
 
+// Gallery component
+var initializedElements = new WeakSet();
+function changeMainImage(event) {
+  var thumbnail = event.currentTarget;
+  var mainImage = document.querySelector('[data-main-image]');
+  if (mainImage) {
+    // Change the main image's src to the clicked thumbnail's src
+    mainImage.src = thumbnail.src;
+
+    // Optional: Add an "active" class to the clicked thumbnail
+    document.querySelectorAll('[data-thumbnail]').forEach(function (thumb) {
+      thumb.classList.remove('active-thumbnail');
+    });
+    thumbnail.classList.add('active-thumbnail');
+  }
+}
+function initGallery() {
+  document.querySelectorAll('[data-thumbnail]').forEach(function (thumbnail) {
+    if (!initializedElements.has(thumbnail)) {
+      thumbnail.addEventListener('click', changeMainImage);
+      initializedElements.add(thumbnail);
+    }
+  });
+}
+function cleanupGallery() {
+  document.querySelectorAll('[data-thumbnail]').forEach(function (thumbnail) {
+    if (initializedElements.has(thumbnail)) {
+      thumbnail.removeEventListener('click', changeMainImage);
+      initializedElements["delete"](thumbnail);
+    }
+  });
+}
+
+// Auto-initialize on DOMContentLoaded and observe dynamically added elements
+if (typeof window !== "undefined") {
+  document.addEventListener("DOMContentLoaded", function () {
+    initGallery(); // Initialize gallery after DOM is loaded
+
+    // Observe the DOM for dynamically added thumbnails
+    var observer = new MutationObserver(function () {
+      initGallery(); // Re-initialize gallery when new elements are added
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  });
+}
+
 // Combine all features into a global object
 var DavidAI = {
   initAlert: initAlert,
@@ -1459,7 +1508,9 @@ var DavidAI = {
   initAccordion: initAccordion,
   cleanupAccordions: cleanupAccordions,
   initStepper: initStepper,
-  cleanupSteppers: cleanupSteppers
+  cleanupSteppers: cleanupSteppers,
+  initGallery: initGallery,
+  cleanupGallery: cleanupGallery
 };
 
 // **Global Initialization Function**
@@ -1471,6 +1522,7 @@ function initDavidAI() {
   initModal();
   initAccordion();
   initStepper();
+  initGallery();
   // Load Popper.js once, then initialize Popper-dependent components
   loadPopperJs().then(function () {
     initDropdowns();
@@ -1498,6 +1550,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
       initDropdowns();
       initPopovers();
       initTooltips();
+      initGallery();
     });
     observer.observe(document.body, {
       childList: true,
@@ -1514,5 +1567,5 @@ var index = _objectSpread2(_objectSpread2({}, DavidAI), {}, {
   initDavidAI: initDavidAI
 });
 
-export { cleanupAccordions, cleanupDropdowns, cleanupModals, cleanupPopovers, cleanupSteppers, cleanupTabs, cleanupTooltips, index as default, initAccordion, initAlert, initCollapse, initDavidAI, initDropdowns, initModal, initPopovers, initStepper, initTabs, initTooltips };
+export { cleanupAccordions, cleanupDropdowns, cleanupGallery, cleanupModals, cleanupPopovers, cleanupSteppers, cleanupTabs, cleanupTooltips, index as default, initAccordion, initAlert, initCollapse, initDavidAI, initDropdowns, initGallery, initModal, initPopovers, initStepper, initTabs, initTooltips };
 //# sourceMappingURL=david-ai.esm.js.map
