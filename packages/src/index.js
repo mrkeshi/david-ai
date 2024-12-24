@@ -10,6 +10,7 @@ import { initTabs, cleanupTabs } from './tabs/tabs.js';
 import { initModal, cleanupModals } from './modal/modal.js';
 import { initAccordion, cleanupAccordions } from './accordion/accordion.js';
 import { initStepper, cleanupSteppers } from './stepper/stepper.js';
+import { initGallery, cleanupGallery } from './gallery/gallery.js';
 
 // Export individual components for named imports
 export {
@@ -29,6 +30,8 @@ export {
   cleanupAccordions,
   initStepper,
   cleanupSteppers,
+  initGallery,
+  cleanupGallery,
 };
 
 // Combine all features into a global object
@@ -49,6 +52,8 @@ const DavidAI = {
   cleanupAccordions,
   initStepper,
   cleanupSteppers,
+  initGallery,
+  cleanupGallery,
 };
 
 // **Global Initialization Function**
@@ -60,6 +65,7 @@ export function initDavidAI() {
   initModal();
   initAccordion();
   initStepper();
+  initGallery();
   // Load Popper.js once, then initialize Popper-dependent components
   loadPopperJs()
     .then(() => {
@@ -89,6 +95,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
       initDropdowns();
       initPopovers();
       initTooltips();
+      initGallery();
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
