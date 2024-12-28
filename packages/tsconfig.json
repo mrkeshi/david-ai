@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "importHelpers": true,
-    "target": "ES6",
-    "module": "ESNext",
     "declaration": true,
-    "declarationDir": "dist/types",
+    "declarationDir": "dist",
+    "emitDeclarationOnly": false,
     "outDir": "dist",
-    "moduleResolution": "Node",
+    "module": "ESNext",
+    "target": "ES6",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "moduleResolution": "node",
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "lib": ["DOM", "ESNext"],
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*.ts", "types/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
