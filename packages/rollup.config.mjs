@@ -2,7 +2,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
-import typescript from '@rollup/plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import { resolve as resolveTslib } from 'path'; // Used to resolve tslib paths
 import { readFileSync } from 'fs';
 const pkg = JSON.parse(readFileSync('./package.json'));
@@ -86,6 +86,7 @@ export default [
       typescript({
         tsconfig: './tsconfig.json',
         tslib: tslibPath,
+        useTsconfigDeclarationDir: true,
       }),
       babel({
         babelHelpers: 'bundled',
