@@ -6,6 +6,8 @@ import { initAlert } from './alert/ts/alert';
 
 // Collapse Component
 import { initCollapse } from './collapse/ts/collapse';
+import { Collapse } from './collapse/ts/collapse-programmatic';
+import type { CollapseConfig, ICollapse } from './collapse/ts/collapse.types';
 
 // Dropdown Component
 import { initDropdowns, cleanupDropdowns } from './dropdown/ts/dropdown';
@@ -37,6 +39,7 @@ import type { ModalConfig, IModal } from './modal/ts/modal.types'; // Export typ
 export {
   initAlert,
   initCollapse,
+  Collapse,
   initDropdowns,
   cleanupDropdowns,
   Dropdown,
@@ -55,7 +58,7 @@ export {
   // cleanupSteppers,
 };
 
-export type { ModalConfig, IModal, DropdownConfig, IDropdown };
+export type { ModalConfig, IModal, DropdownConfig, IDropdown, CollapseConfig, ICollapse };
 
 // Aggregate all exports into a single object for UMD consumers
 export const DavidAI = {
