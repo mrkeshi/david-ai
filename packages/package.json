@@ -6,7 +6,7 @@
   "module": "dist/david-ai.esm.js",
   "browser": "dist/david-ai.js",
   "unpkg": "dist/david-ai.min.js",
-  "types": "dist/types/index.d.ts",
+  "types": "dist/index.d.ts",
   "type": "module",
   "exports": {
     "import": "./dist/david-ai.esm.js",
@@ -52,8 +52,8 @@
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-terser": "^0.4.3",
-    "@rollup/plugin-typescript": "^12.1.2",
     "rollup": "^3.25.1",
+    "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.7.2"
   },
   "dependencies": {
