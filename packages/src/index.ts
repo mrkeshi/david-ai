@@ -15,7 +15,9 @@ import { Dropdown } from './dropdown/ts/dropdown-programmatic';
 import type { DropdownConfig, IDropdown } from './dropdown/ts/dropdown.types';
 
 // Popover Component
-// import { initPopovers, cleanupPopovers } from './popover/ts/popover';
+import { initPopovers, cleanupPopovers } from './popover/ts/popover';
+import { Popover } from './popover/ts/popover-programmatic';
+import type { PopoverConfig, IPopover } from './popover/ts/popover.types';
 
 // Tooltip Component
 // import { initTooltips, cleanupTooltips } from './tooltip/ts/tooltip';
@@ -43,8 +45,9 @@ export {
   initDropdowns,
   cleanupDropdowns,
   Dropdown,
-  // initPopovers,
-  // cleanupPopovers,
+  initPopovers,
+  cleanupPopovers,
+  Popover,
   // initTooltips,
   // cleanupTooltips,
   // initTabs,
@@ -58,7 +61,7 @@ export {
   // cleanupSteppers,
 };
 
-export type { ModalConfig, IModal, DropdownConfig, IDropdown, CollapseConfig, ICollapse };
+export type { ModalConfig, IModal, DropdownConfig, IDropdown, CollapseConfig, ICollapse, PopoverConfig, IPopover };
 
 // Aggregate all exports into a single object for UMD consumers
 export const DavidAI = {
