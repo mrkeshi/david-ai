@@ -1,30 +1,31 @@
-import { CollapseEvent } from "./collapse.types";
+// Collapse Component in TypeScript
 
+// Track initialized elements
 const initializedElements = new WeakSet<HTMLElement>();
 
-export function toggleCollapse(event: CollapseEvent): void {
-  const collapseID = event.currentTarget.getAttribute("data-dui-target");
+/**
+ * Toggles the visibility of a collapsible element.
+ * @param event - The click event triggering the toggle.
+ */
+export function toggleCollapse(event: Event): void {
+  const button = event.currentTarget as HTMLElement | null;
+  if (!button) return;
+
+  const collapseID = button.getAttribute("data-dui-target");
 
   if (collapseID && collapseID.startsWith("#")) {
-    const collapseElement = document.querySelector(
-      collapseID
-    ) as HTMLElement | null;
-    const isExpanded =
-      event.currentTarget.getAttribute("aria-expanded") === "true";
+    const collapseElement = document.querySelector<HTMLElement>(collapseID);
+    const isExpanded = button.getAttribute("aria-expanded") === "true";
 
     if (collapseElement) {
       // Toggle max-height for collapsible content
-      collapseElement.style.maxHeight = isExpanded
-        ? "0"
-        : collapseElement.scrollHeight + "px";
+      collapseElement.style.maxHeight = isExpanded ? "0" : `${collapseElement.scrollHeight}px`;
 
       // Update aria-expanded attribute
-      event.currentTarget.setAttribute("aria-expanded", String(!isExpanded));
+      button.setAttribute("aria-expanded", `${!isExpanded}`);
 
       // Toggle rotate-180 class on the icon
-      const icon = event.currentTarget.querySelector(
-        "[data-dui-icon]"
-      ) as HTMLElement | null;
+      const icon = button.querySelector<HTMLElement>("[data-dui-icon]");
       if (icon) {
         icon.classList.toggle("rotate-180", !isExpanded);
       }
@@ -32,15 +33,16 @@ export function toggleCollapse(event: CollapseEvent): void {
   }
 }
 
+/**
+ * Initializes collapsible buttons by attaching event listeners.
+ */
 export function initCollapse(): void {
-  document
-    .querySelectorAll<HTMLElement>("[data-dui-toggle='collapse']")
-    .forEach((button) => {
-      if (!initializedElements.has(button)) {
-        button.addEventListener("click", toggleCollapse as EventListener);
-        initializedElements.add(button); // Mark as initialized
-      }
-    });
+  document.querySelectorAll<HTMLElement>("[data-dui-toggle='collapse']").forEach((button) => {
+    if (!initializedElements.has(button)) {
+      button.addEventListener("click", toggleCollapse);
+      initializedElements.add(button); // Mark as initialized
+    }
+  });
 }
 
 // Auto-initialize on DOMContentLoaded and observe dynamically added elements
