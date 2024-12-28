@@ -9,6 +9,8 @@ import { initCollapse } from './collapse/ts/collapse';
 
 // Dropdown Component
 import { initDropdowns, cleanupDropdowns } from './dropdown/ts/dropdown';
+import { Dropdown } from './dropdown/ts/dropdown-programmatic';
+import type { DropdownConfig, IDropdown } from './dropdown/ts/dropdown.types';
 
 // Popover Component
 // import { initPopovers, cleanupPopovers } from './popover/ts/popover';
@@ -21,6 +23,9 @@ import { initDropdowns, cleanupDropdowns } from './dropdown/ts/dropdown';
 
 // Modal Component
 import { initModal, cleanupModals } from './modal/ts/modal';
+import { Modal } from './modal/ts/modal-programmatic'; // Export the Modal class
+import type { ModalConfig, IModal } from './modal/ts/modal.types'; // Export types for external use
+
 
 // Accordion Component
 // import { initAccordion, cleanupAccordions } from './accordion/ts/accordion';
@@ -34,6 +39,7 @@ export {
   initCollapse,
   initDropdowns,
   cleanupDropdowns,
+  Dropdown,
   // initPopovers,
   // cleanupPopovers,
   // initTooltips,
@@ -42,11 +48,14 @@ export {
   // cleanupTabs,
   initModal,
   cleanupModals,
+  Modal,
   // initAccordion,
   // cleanupAccordions,
   // initStepper,
   // cleanupSteppers,
 };
+
+export type { ModalConfig, IModal, DropdownConfig, IDropdown };
 
 // Aggregate all exports into a single object for UMD consumers
 export const DavidAI = {
