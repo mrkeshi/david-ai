@@ -23,7 +23,9 @@ import type { PopoverConfig, IPopover } from './popover/ts/popover.types';
 // import { initTooltips, cleanupTooltips } from './tooltip/ts/tooltip';
 
 // Tabs Component
-// import { initTabs, cleanupTabs } from './tabs/ts/tabs';
+import { initTabs, cleanupTabs } from './tabs/ts/tabs';
+import { Tabs } from './tabs/ts/tabs-programmatic';
+import type { TabsConfig, ITabs } from './tabs/ts/tabs.types';
 
 // Modal Component
 import { initModal, cleanupModals } from './modal/ts/modal';
@@ -50,8 +52,9 @@ export {
   Popover,
   // initTooltips,
   // cleanupTooltips,
-  // initTabs,
-  // cleanupTabs,
+  initTabs,
+  cleanupTabs,
+  Tabs,
   initModal,
   cleanupModals,
   Modal,
@@ -61,7 +64,7 @@ export {
   // cleanupSteppers,
 };
 
-export type { ModalConfig, IModal, DropdownConfig, IDropdown, CollapseConfig, ICollapse, PopoverConfig, IPopover };
+export type { ModalConfig, IModal, DropdownConfig, IDropdown, CollapseConfig, ICollapse, PopoverConfig, IPopover, TabsConfig, ITabs };
 
 // Aggregate all exports into a single object for UMD consumers
 export const DavidAI = {
@@ -73,8 +76,8 @@ export const DavidAI = {
   // cleanupPopovers,
   // initTooltips,
   // cleanupTooltips,
-  // initTabs,
-  // cleanupTabs,
+  initTabs,
+  cleanupTabs,
   initModal,
   cleanupModals,
   // initAccordion,
@@ -88,7 +91,7 @@ export function initDavidAI(): void {
   // Initialize non-Popper components
   initAlert();
   initCollapse();
-  // initTabs();
+  initTabs();
   initModal();
   // initAccordion();
   // initStepper();
@@ -97,7 +100,7 @@ export function initDavidAI(): void {
   loadPopperJs()
     .then(() => {
       initDropdowns();
-      // initPopovers();
+      initPopovers();
       // initTooltips();
     })
     .catch((error:any) => {
@@ -117,10 +120,10 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       initCollapse();
       // initAccordion();
       // initStepper();
-      // initTabs();
+      initTabs();
       initModal();
       initDropdowns();
-      // initPopovers();
+      initPopovers();
       // initTooltips();
     });
 
