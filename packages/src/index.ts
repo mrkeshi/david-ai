@@ -20,7 +20,9 @@ import { Popover } from './popover/ts/popover-programmatic';
 import type { PopoverConfig, IPopover } from './popover/ts/popover.types';
 
 // Tooltip Component
-// import { initTooltips, cleanupTooltips } from './tooltip/ts/tooltip';
+import { initTooltips, cleanupTooltips } from './tooltip/ts/tooltip';
+import { Tooltip } from './tooltip/ts/tooltip-programmatic';
+import type { TooltipConfig, ITooltip } from './tooltip/ts/tooltip.types';
 
 // Tabs Component
 import { initTabs, cleanupTabs } from './tabs/ts/tabs';
@@ -50,8 +52,9 @@ export {
   initPopovers,
   cleanupPopovers,
   Popover,
-  // initTooltips,
-  // cleanupTooltips,
+  initTooltips,
+  cleanupTooltips,
+  Tooltip,
   initTabs,
   cleanupTabs,
   Tabs,
@@ -64,7 +67,7 @@ export {
   // cleanupSteppers,
 };
 
-export type { ModalConfig, IModal, DropdownConfig, IDropdown, CollapseConfig, ICollapse, PopoverConfig, IPopover, TabsConfig, ITabs };
+export type { ModalConfig, IModal, DropdownConfig, IDropdown, CollapseConfig, ICollapse, PopoverConfig, IPopover, TabsConfig, ITabs, TooltipConfig, ITooltip };
 
 // Aggregate all exports into a single object for UMD consumers
 export const DavidAI = {
@@ -72,10 +75,10 @@ export const DavidAI = {
   initCollapse,
   initDropdowns,
   cleanupDropdowns,
-  // initPopovers,
-  // cleanupPopovers,
-  // initTooltips,
-  // cleanupTooltips,
+  initPopovers,
+  cleanupPopovers,
+  initTooltips,
+  cleanupTooltips,
   initTabs,
   cleanupTabs,
   initModal,
@@ -101,7 +104,7 @@ export function initDavidAI(): void {
     .then(() => {
       initDropdowns();
       initPopovers();
-      // initTooltips();
+      initTooltips();
     })
     .catch((error:any) => {
       console.error('Failed to load Popper.js:', error);
@@ -124,7 +127,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       initModal();
       initDropdowns();
       initPopovers();
-      // initTooltips();
+      initTooltips();
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
