@@ -1,75 +1,113 @@
 
 <div class="flex flex-col gap-4">
   <div class="flex gap-2">
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-stone-50" for=":R9:">
-      <input id=":R9:" type="radio" style="display:none" value=":R9H1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-stone-50" for=":Rh:">
-      <input id=":Rh:" type="radio" style="display:none" value=":RhH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
+    <div class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer relative" for="stone1">
+        <input type="radio" name="stone" checked class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow-sm hover:shadow border border-stone-200 checked:bg-stone-800 checked:border-stone-800" id="stone1" />
+        <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="currentColor"/>
+          </svg>
+        </span>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer relative" for="stone2">
+        <input type="radio" name="stone" class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow-sm hover:shadow border border-stone-200 checked:bg-stone-800 checked:border-stone-800" id="stone2" />
+        <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="currentColor"/>
+          </svg>
+        </span>
+      </label>
+    </div>
   </div>
   <div class="flex gap-2">
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-stone-800" for=":Ra:">
-      <input id=":Ra:" type="radio" style="display:none" value=":RaH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-stone-800" for=":Ri:">
-      <input id=":Ri:" type="radio" style="display:none" value=":RiH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
+    <div class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer relative" for="blue1">
+        <input type="radio" name="blue" checked class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow-sm hover:shadow border border-blue-200 checked:bg-blue-500 checked:border-blue-500" id="blue1" />
+        <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="currentColor"/>
+          </svg>
+        </span>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer relative" for="blue2">
+        <input type="radio" name="blue" class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow-sm hover:shadow border border-blue-200 checked:bg-blue-500 checked:border-blue-500" id="blue2" />
+        <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="currentColor"/>
+          </svg>
+        </span>
+      </label>
+    </div>
   </div>
   <div class="flex gap-2">
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-blue-50" for=":Rb:">
-      <input id=":Rb:" type="radio" style="display:none" value=":RbH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-blue-50" for=":Rj:">
-      <input id=":Rj:" type="radio" style="display:none" value=":RjH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
+    <div class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer relative" for="green1">
+        <input type="radio" name="green" checked class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow-sm hover:shadow border border-green-200 checked:bg-green-500 checked:border-green-500" id="green1" />
+        <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="currentColor"/>
+          </svg>
+        </span>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer relative" for="green2">
+        <input type="radio" name="green" class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow-sm hover:shadow border border-green-200 checked:bg-green-500 checked:border-green-500" id="green2" />
+        <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="currentColor"/>
+          </svg>
+        </span>
+      </label>
+    </div>
   </div>
   <div class="flex gap-2">
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-green-50" for=":Rc:">
-      <input id=":Rc:" type="radio" style="display:none" value=":RcH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-green-50" for=":Rk:">
-      <input id=":Rk:" type="radio" style="display:none" value=":RkH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
+    <div class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer relative" for="amber1">
+        <input type="radio" name="amber" checked class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow-sm hover:shadow border border-amber-200 checked:bg-amber-500 checked:border-amber-500" id="amber1" />
+        <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="currentColor"/>
+          </svg>
+        </span>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer relative" for="amber2">
+        <input type="radio" name="amber" class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow-sm hover:shadow border border-amber-200 checked:bg-amber-500 checked:border-amber-500" id="amber2" />
+        <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="currentColor"/>
+          </svg>
+        </span>
+      </label>
+    </div>
   </div>
   <div class="flex gap-2">
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-amber-50" for=":Rd:">
-      <input id=":Rd:" type="radio" style="display:none" value=":RdH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-amber-50" for=":Rl:">
-      <input id=":Rl:" type="radio" style="display:none" value=":RlH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
-  </div>
-  <div class="flex gap-2">
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-red-50" for=":Re:">
-      <input id=":Re:" type="radio" style="display:none" value=":ReH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
-    <label class="group block cursor-pointer shadow-sm shadow-stone-950/5 relative h-5 w-5 shrink-0 rounded-full bg-transparent border border-stone-200 transition-all duration-200 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none hover:shadow-md text-red-50" for=":Rm:">
-      <input id=":Rm:" type="radio" style="display:none" value=":RmH1:" />
-      <span class="pointer-events-none absolute left-2/4 top-2/4 text-current -translate-x-2/4 -translate-y-2/4 scale-75 opacity-0 transition-all duration-200 ease-in group-data-[checked=true]:scale-100 group-data-[checked=true]:opacity-100"><svg width="10px" height="10px" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 0.25C5.06294 0.25 0.25 5.06294 0.25 11C0.25 16.9371 5.06294 21.75 11 21.75C16.9371 21.75 21.75 16.9371 21.75 11C21.75 5.06294 16.9371 0.25 11 0.25Z" fill="currentColor"></path></svg>
-      </span>
-    </label>
+    <div class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer relative" for="red1">
+        <input type="radio" name="red" checked class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow-sm hover:shadow border border-red-200 checked:bg-red-500 checked:border-red-500" id="red1" />
+        <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="currentColor"/>
+          </svg>
+        </span>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer relative" for="red2">
+        <input type="radio" name="red" class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow-sm hover:shadow border border-red-200 checked:bg-red-500 checked:border-red-500" id="red2" />
+        <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="currentColor"/>
+          </svg>
+        </span>
+      </label>
+    </div>
   </div>
 </div>

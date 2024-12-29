@@ -21,6 +21,18 @@ const tslibPath = resolveTslib('node_modules/tslib/tslib.es6.js');
 const inputFile = 'src/index.ts'; // Entry file
 const outputDir = 'dist'; // Output directory
 
+import { readFileSync } from 'fs';
+
+const pkg = JSON.parse(readFileSync('./package.json'));
+
+const copyrightBanner = `
+/*!
+ * David AI JavaScript Library v${pkg.version}
+ * (c) ${new Date().getFullYear()} David AI - Creative Tim
+ * Released under the MIT License.
+ */
+`;
+
 export default [
   // UMD Build (Non-minified)
   {

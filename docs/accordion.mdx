@@ -6,6 +6,10 @@ prev: docs/react/text-area
 next: docs/react/avatar
 ---
 
+<ScriptLoader />
+
+<InfoBadge />
+
 # Tailwind CSS Accordion
 
 David UI's accordion component is built with Tailwind CSS and HTML to create sleek expand/collapse sections. Perfect for FAQs, menus, and content toggling, it provides an interactive way to organize information. 
@@ -17,7 +21,7 @@ Customize styles effortlessly and explore examples to integrate this versatile, 
 
 ## Basic Accordion
 
-Learn how to create a straightforward, responsive `Accordion` component. It's a versatile tool, perfect for including FAQ sections on your site.
+Create an SEO-optimized accordion component with exclusive mode using `data-dui-accordion-mode="exclusive"`. This ensures only one section stays open at a time, ideal for FAQ pages and content organization. The semantic HTML and ARIA attributes enhance both accessibility and search engine visibility while providing an excellent user experience.
 
 <PreviewWithCode relativePath="accordion/accordion-demo.tsx" language="html" />
 
@@ -25,7 +29,7 @@ Learn how to create a straightforward, responsive `Accordion` component. It's a 
 
 ## Accordion All Open
 
-Initialize all Accordion sections as expanded by default by providing an array of values to the `defaultValue` property.
+Enhance content accessibility and SEO with the "all-open" accordion mode. Using `data-dui-accordion-mode="all-open"` allows users to view multiple sections simultaneously while maintaining collapse functionality. This feature optimizes content visibility and user engagement by displaying information upfront. Ideal for documentation and content-rich pages, the semantic HTML and ARIA attributes ensure proper accessibility and search engine indexing.
 
 <PreviewWithCode relativePath="accordion/accordion-all-open.tsx" language="html" />
 
@@ -41,7 +45,7 @@ The Accordion component can operate in both controlled and uncontrolled modes. I
 
 ## Accordion Custom Icon
 
-Personalize the icon for the Accordion trigger using the `Accordion.Trigger` component. By leveraging the `group-data-[open=true]` attribute, you can dynamically show or hide icons based on the Accordion state.
+Customize the accordion's toggle icons using `data-dui-accordion-icon-close` and `data-dui-accordion-icon-open` attributes. These allow you to seamlessly switch between different icons based on the accordion's open/closed state, enhancing visual feedback and user experience.
 
 <PreviewWithCode relativePath="accordion/accordion-custom-icon.tsx" language="html" />
 
@@ -57,6 +61,78 @@ Tailor the appearance of your Accordion by applying styles through the `classNam
 
 ## Accordion Disabled
 
-Prevent user interaction with specific Accordion sections by applying the `disabled` property. Disabled items will not respond to user actions.
+Enhance accessibility and user experience by disabling specific accordion sections using `aria-disabled="true"`. This attribute prevents user interaction and clearly indicates non-interactive content, improving both SEO and usability. Disabled sections maintain visual consistency while being properly marked up for screen readers and search engines.
 
 <PreviewWithCode relativePath="accordion/accordion-disabled.tsx" language="html" />
+
+---
+
+## Required Script
+
+The Accordion component in david-ai requires JavaScript to handle the accordion functionality. The library provides smooth transitions and collapse/expand behavior through data attributes.
+
+### Installation
+
+To use the Accordion component in your project, you first need to install the `david-ai` library via npm:
+
+<CodePreviewTailwindClasses codeSnippet={`npm install david-ai`}/>
+
+### Basic Usage
+
+<CodePreviewTailwindClasses codeSnippet={
+`import { initAccordion } from 'david-ai';
+
+// Initialize accordion functionality
+initAccordion();
+`
+}/>
+
+### Using with Global Access
+If you prefer, you can use the DavidAI global object instead of directly importing initAccordion:
+
+<CodePreviewTailwindClasses codeSnippet={
+`import * as DavidAI from 'david-ai';
+
+// Initialize accordion functionality
+DavidAI.initAccordion();
+`
+}/>
+
+### Using with CDN
+You can include david-ai via a CDN and initialize accordion functionality globally in the browser. Add the following script to your HTML file:
+
+<CodePreviewTailwindClasses codeSnippet={`<script src="https://cdn.jsdelivr.net/gh/creativetimofficial/david-ai@1.0.4/packages/dist/david-ai.min.js" defer></script>`}/>
+
+### HTML Code Example
+
+<CodePreviewTailwindClasses codeSnippet={
+`<div class="group block w-full" aria-disabled="false" data-dui-accordion-container data-dui-accordion-mode="exclusive">
+    <div 
+      class="flex items-center justify-between w-full py-5 text-left font-medium dark:text-white text-stone-800 cursor-pointer"
+      data-dui-accordion-toggle
+      data-dui-accordion-target="#basicAccordion1"
+      aria-expanded="false">
+      What is David UI?
+      <svg data-dui-accordion-icon width="1.5em" height="1.5em" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor" class="h-4 w-4 rotate-180">
+        <path d="M6 9L12 15L18 9" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+      </svg>
+    </div>
+    <div id="basicAccordion1" class="overflow-hidden transition-all duration-300 border-b border-stone-200 dark:border-stone-700">
+      <p class="mb-5 text-sm text-stone-500 dark:text-stone-400">David UI is a comprehensive UI library built with Tailwind CSS, offering modern and customizable components for web development.</p>
+    </div>
+
+    <div 
+      class="flex items-center justify-between w-full py-5 text-left font-medium dark:text-white text-stone-800 cursor-pointer"
+      data-dui-accordion-toggle
+      data-dui-accordion-target="#basicAccordion2"
+      aria-expanded="false">
+      Why choose David UI?
+      <svg data-dui-accordion-icon width="1.5em" height="1.5em" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor" class="h-4 w-4">
+        <path d="M6 9L12 15L18 9" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+      </svg>
+    </div>
+    <div id="basicAccordion2" class="overflow-hidden transition-all duration-300 border-b border-stone-200 dark:border-stone-700">
+      <p class="mb-5 text-sm text-stone-500 dark:text-stone-400">David UI provides an extensive collection of ready-to-use components with seamless integration and excellent developer experience.</p>
+    </div>
+  </div>`
+}/>
