@@ -41,7 +41,9 @@ import { Accordion } from './accordion/ts/accordion-programmatic';
 import type { AccordionConfig, IAccordion } from './accordion/ts/accordion.types';
 
 // Stepper Component
-// import { initStepper, cleanupSteppers } from './stepper/ts/stepper';
+import { initStepper, cleanupSteppers } from './stepper/ts/stepper';
+import { Stepper } from './stepper/ts/stepper-programmatic';
+import type { StepperConfig, IStepper } from './stepper/ts/stepper.types';
 
 // Export individual components
 export {
@@ -66,11 +68,12 @@ export {
   initAccordion,
   cleanupAccordions,
   Accordion,
-  // initStepper,
-  // cleanupSteppers,
+  initStepper,
+  cleanupSteppers,
+  Stepper,
 };
 
-export type { ModalConfig, IModal, DropdownConfig, IDropdown, CollapseConfig, ICollapse, PopoverConfig, IPopover, TabsConfig, ITabs, TooltipConfig, ITooltip, AccordionConfig, IAccordion };
+export type { ModalConfig, IModal, DropdownConfig, IDropdown, CollapseConfig, ICollapse, PopoverConfig, IPopover, TabsConfig, ITabs, TooltipConfig, ITooltip, AccordionConfig, IAccordion, StepperConfig, IStepper };
 
 // Aggregate all exports into a single object for UMD consumers
 export const DavidAI = {
@@ -88,8 +91,8 @@ export const DavidAI = {
   cleanupModals,
   initAccordion,
   cleanupAccordions,
-  // initStepper,
-  // cleanupSteppers,
+  initStepper,
+  cleanupSteppers,
 };
 
 // Global initialization function
@@ -100,7 +103,7 @@ export function initDavidAI(): void {
   initTabs();
   initModal();
   initAccordion();
-  // initStepper();
+  initStepper();
 
   // Dynamically load Popper.js and initialize Popper-dependent components
   loadPopperJs()
@@ -125,7 +128,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       initAlert();
       initCollapse();
       initAccordion();
-      // initStepper();
+      initStepper();
       initTabs();
       initModal();
       initDropdowns();
