@@ -4,6 +4,9 @@ import { loadPopperJs } from './utils/loadPopper';
 // Alert Component
 import { initAlert } from './alert/ts/alert';
 
+// Gallery Component
+import { initGallery, cleanupGallery } from './gallery/ts/gallery';
+
 // Collapse Component
 import { initCollapse } from './collapse/ts/collapse';
 import { Collapse } from './collapse/ts/collapse-programmatic';
@@ -36,7 +39,7 @@ import type { ModalConfig, IModal } from './modal/ts/modal.types'; // Export typ
 
 
 // Accordion Component
-import { initAccordion, cleanupAccordions } from './accordion/ts/accordion';
+import { initAccordion, cleanupAccordions, toggleAccordionById } from './accordion/ts/accordion';
 import { Accordion } from './accordion/ts/accordion-programmatic';
 import type { AccordionConfig, IAccordion } from './accordion/ts/accordion.types';
 
@@ -68,9 +71,12 @@ export {
   initAccordion,
   cleanupAccordions,
   Accordion,
+  toggleAccordionById,
   initStepper,
   cleanupSteppers,
   Stepper,
+  initGallery,
+  cleanupGallery,
 };
 
 export type { ModalConfig, IModal, DropdownConfig, IDropdown, CollapseConfig, ICollapse, PopoverConfig, IPopover, TabsConfig, ITabs, TooltipConfig, ITooltip, AccordionConfig, IAccordion, StepperConfig, IStepper };
@@ -91,8 +97,11 @@ export const DavidAI = {
   cleanupModals,
   initAccordion,
   cleanupAccordions,
+  toggleAccordionById,
   initStepper,
   cleanupSteppers,
+  initGallery,
+  cleanupGallery,
 };
 
 // Global initialization function
@@ -104,7 +113,7 @@ export function initDavidAI(): void {
   initModal();
   initAccordion();
   initStepper();
-
+  initGallery();
   // Dynamically load Popper.js and initialize Popper-dependent components
   loadPopperJs()
     .then(() => {
@@ -129,6 +138,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       initCollapse();
       initAccordion();
       initStepper();
+      initGallery();
       initTabs();
       initModal();
       initDropdowns();
