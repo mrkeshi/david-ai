@@ -93,23 +93,23 @@ export function initTabs(): void {
  * Cleans up all initialized tabs.
  */
 export function cleanupTabs(): void {
-  // We need to store tab groups in an enumerable structure, as WeakSet cannot be iterated
-  const tabGroups: Set<HTMLElement> = new Set(initializedTabs as any);
+  // Query all tab groups in the document instead of trying to iterate WeakSet
+  document.querySelectorAll<HTMLElement>(".tab-group").forEach((tabGroup) => {
+    if (initializedTabs.has(tabGroup)) {
+      const tabList = tabGroup.querySelector<HTMLElement>("[role='tablist']");
+      const tabLinks = tabList?.querySelectorAll<HTMLElement>(".tab-link") || [];
 
-  tabGroups.forEach((tabGroup) => {
-    const tabList = tabGroup.querySelector<HTMLElement>("[role='tablist']");
-    const tabLinks = tabList?.querySelectorAll<HTMLElement>(".tab-link") || [];
+      // Remove event listeners from tab links
+      tabLinks.forEach((link) => {
+        if (link.parentNode) {
+          const clone = link.cloneNode(true) as HTMLElement;
+          link.parentNode.replaceChild(clone, link);
+        }
+      });
 
-    // Remove event listeners from tab links
-    tabLinks.forEach((link) => {
-      if (link.parentNode) {
-        const clone = link.cloneNode(true) as HTMLElement;
-        link.parentNode.replaceChild(clone, link);
-      }
-    });
-
-    // Remove the tab group from the WeakSet
-    initializedTabs.delete(tabGroup);
+      // Remove the tab group from the WeakSet
+      initializedTabs.delete(tabGroup);
+    }
   });
 }
 
