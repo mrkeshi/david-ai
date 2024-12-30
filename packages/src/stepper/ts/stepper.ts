@@ -10,20 +10,20 @@ function updateStepperState(container: StepperContainer): void {
   const stepContents = container.querySelectorAll<HTMLElement>("[data-dui-step-content]");
   const prevButtons = container.querySelectorAll<HTMLButtonElement>("[data-dui-stepper-prev]");
   const nextButtons = container.querySelectorAll<HTMLButtonElement>("[data-dui-stepper-next]");
-  let currentStep = parseInt(container.dataset.currentStep || "1", 10);
+  let currentStep = parseInt(container.getAttribute("data-dui-step") || "1", 10);
 
   function updateState(): void {
     // Update step circles and connector lines
     steps.forEach((step, index) => {
       const stepNumber = index + 1;
-      step.dataset.active = String(stepNumber === currentStep);
-      step.dataset.completed = String(stepNumber < currentStep);
+      step.setAttribute("data-active", String(stepNumber === currentStep));
+      step.setAttribute("data-completed", String(stepNumber < currentStep));
       step.setAttribute("aria-disabled", String(stepNumber > currentStep));
     });
 
     // Update step content visibility
     stepContents.forEach((content) => {
-      const contentStep = parseInt(content.dataset.stepContent || "0", 10);
+      const contentStep = parseInt(content.getAttribute("data-dui-step-content") || "0", 10);
       if (contentStep === currentStep) {
         content.classList.remove("hidden");
       } else {
@@ -45,7 +45,7 @@ function updateStepperState(container: StepperContainer): void {
   function onNextButtonClick(): void {
     if (currentStep < steps.length) {
       currentStep++;
-      container.dataset.currentStep = String(currentStep);
+      container.setAttribute("data-dui-step", String(currentStep));
       updateState();
     }
   }
@@ -53,7 +53,7 @@ function updateStepperState(container: StepperContainer): void {
   function onPrevButtonClick(): void {
     if (currentStep > 1) {
       currentStep--;
-      container.dataset.currentStep = String(currentStep);
+      container.setAttribute("data-dui-step", String(currentStep));
       updateState();
     }
   }
@@ -89,7 +89,7 @@ export function initStepper(): void {
 
       // Set initial step based on attribute
       const initialStep = parseInt(container.getAttribute("data-dui-initial-step") || "1", 10);
-      container.dataset.currentStep = String(initialStep);
+      container.setAttribute("data-dui-step", String(initialStep));
 
       updateStepperState(container);
     }
