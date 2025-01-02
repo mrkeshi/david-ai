@@ -41,4 +41,9 @@ export interface IDropdown {
    * Destroys the Dropdown instance and cleans up resources.
    */
   destroy(): void;
+
+  /**
+   * Set the prevent outside click flag to true.
+   */
+  preventOutsideClick(): void;
 }
