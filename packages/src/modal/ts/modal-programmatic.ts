@@ -8,7 +8,6 @@ export class Modal implements IModal {
   private _isVisible: boolean = false;
   private _config: ModalConfig;
   private _modalElement: HTMLElement;
-  private _backdropElement: HTMLElement | null = null;
 
   /**
    * Initialize the modal.
@@ -18,14 +17,17 @@ export class Modal implements IModal {
   constructor(modalElement: HTMLElement, config: ModalConfig = {}) {
     this._modalElement = modalElement;
     this._config = {
-      backdrop: true,
       keyboard: true,
       closeOnOutsideClick: true,
-      backdropClasses: ['fixed', 'inset-0', 'bg-black', 'bg-opacity-50', 'z-10'],
       ...config,
     };
 
+    // Setup modal
     this.setupModal();
+
+    setTimeout(() => {
+      this.removeHiddenClass();
+    }, 300);
   }
 
   /**
@@ -35,13 +37,9 @@ export class Modal implements IModal {
     if (this._isVisible) return;
     this._isVisible = true;
 
-    // Show the modal element
-    this._modalElement.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
-    this._modalElement.classList.add('opacity-100', 'block');
+    this._modalElement.classList.remove('opacity-0', 'pointer-events-none');
+    this._modalElement.classList.add('opacity-100');
     this._modalElement.setAttribute('aria-hidden', 'false');
-
-    // Show the backdrop if enabled
-    if (this._config.backdrop) this.showBackdrop();
 
     // Add listeners
     if (this._config.keyboard) {
@@ -59,13 +57,10 @@ export class Modal implements IModal {
     if (!this._isVisible) return;
     this._isVisible = false;
 
-    // Hide the modal element
-    this._modalElement.classList.add('hidden', 'opacity-0', 'pointer-events-none');
-    this._modalElement.classList.remove('opacity-100', 'block');
+    // Hide the modal element with animation
+    this._modalElement.classList.add('opacity-0', 'pointer-events-none');
+    this._modalElement.classList.remove('opacity-100');
     this._modalElement.setAttribute('aria-hidden', 'true');
-
-    // Remove the backdrop if enabled
-    if (this._config.backdrop) this.hideBackdrop();
 
     // Remove listeners
     if (this._config.keyboard) {
@@ -96,42 +91,19 @@ export class Modal implements IModal {
    * Hides the modal if it's not already hidden.
    */
   private setupModal(): void {
-    const isHidden = this._modalElement.classList.contains('hidden') ||
+    const isHidden = this._modalElement.classList.contains('opacity-0') ||
                      this._modalElement.getAttribute('aria-hidden') === 'true';
     this._isVisible = !isHidden;
 
-    // Ensure proper aria attributes
-    this._modalElement.setAttribute('aria-hidden', String(isHidden));
-  }
-
-  /**
-   * Show the backdrop element with custom classes.
-   */
-  private showBackdrop(): void {
-    if (this._backdropElement) return;
-
-    // Create the backdrop element
-    this._backdropElement = document.createElement('div');
-    this._backdropElement.className = this._config.backdropClasses?.join(' ') ?? 'backdrop';
-
-    // Wrap the modal inside the backdrop
-    this._backdropElement.appendChild(this._modalElement);
-
-    // Append the backdrop to the body
-    document.body.appendChild(this._backdropElement);
-
-    console.log('Backdrop created:', this._backdropElement);
-  }
-
-
-  /**
-   * Hide and remove the backdrop element.
-   */
-  private hideBackdrop(): void {
-    if (this._backdropElement) {
-      this._backdropElement.remove();
-      this._backdropElement = null;
+    // Ensure proper initial state
+    if (isHidden) {
+      this._modalElement.classList.add('opacity-0', 'pointer-events-none');
+      this._modalElement.classList.remove('opacity-100');
+    } else {
+      this._modalElement.classList.remove('opacity-0', 'pointer-events-none');
+      this._modalElement.classList.add('opacity-100');
     }
+    this._modalElement.setAttribute('aria-hidden', String(isHidden));
   }
 
   /**
@@ -154,17 +126,17 @@ export class Modal implements IModal {
     // Reference to the first child of the modal element
     const modalContent = this._modalElement.firstElementChild;
 
-    console.log('handleOutsideClick triggered', {
-      target,
-      modalContent,
-    });
-
     // Check if the click is outside the modal content
     if (modalContent && !modalContent.contains(target)) {
-      console.log('Clicked outside modal content');
       this.hide();
-    } else {
-      console.log('Clicked inside modal content');
     }
   };
+
+  /**
+   * Removes the hidden class from the modal element.
+   * This is typically called before showing the modal.
+   */
+  private removeHiddenClass(): void {
+    this._modalElement.classList.remove('hidden');
+  }
 }
