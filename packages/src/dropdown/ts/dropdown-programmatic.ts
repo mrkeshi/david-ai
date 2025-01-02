@@ -11,6 +11,8 @@ export class Dropdown implements IDropdown {
   private popperInstance: Instance | null = null;
   private config: DropdownConfig;
   private isOpen: boolean = false; // Internal state
+  private shouldIgnoreClick: boolean = false;
+  private documentClickHandler: (e: Event) => void;
 
   /**
    * Creates an instance of Dropdown.
@@ -28,6 +30,9 @@ export class Dropdown implements IDropdown {
       closeOnOutsideClick: config.closeOnOutsideClick ?? true,
       offset: config.offset || [0, 5],
     };
+
+    // Bind the document click handler to this instance
+    this.documentClickHandler = this.handleDocumentClick.bind(this);
 
     this.init();
   }
@@ -50,6 +55,20 @@ export class Dropdown implements IDropdown {
   }
 
   /**
+   * Handles document click events for outside clicks
+   */
+  private handleDocumentClick(e: Event): void {
+    if (this.shouldIgnoreClick) {
+      this.shouldIgnoreClick = false; // Reset flag
+      return;
+    }
+
+    if (!this.menu.contains(e.target as Node) && !this.referenceElement.contains(e.target as Node)) {
+      this.close();
+    }
+  }
+
+  /**
    * Initializes the Dropdown component.
    */
   private async init(): Promise<void> {
@@ -63,12 +82,15 @@ export class Dropdown implements IDropdown {
 
     // Close dropdown if clicked outside
     if (this.config.closeOnOutsideClick) {
-      document.addEventListener("click", (e: Event) => {
-        if (!this.menu.contains(e.target as Node) && !this.referenceElement.contains(e.target as Node)) {
-          this.close();
-        }
-      });
+      document.addEventListener("click", this.documentClickHandler);
     }
+  }
+
+  /**
+   * Set the prevent outside click flag to true.
+   */
+  preventOutsideClick(): void {
+    this.shouldIgnoreClick = true;
   }
 
   /**
@@ -107,6 +129,6 @@ export class Dropdown implements IDropdown {
   destroy(): void {
     this.popperInstance?.destroy();
     this.popperInstance = null;
-    document.removeEventListener("click", this.close);
+    document.removeEventListener("click", this.documentClickHandler);
   }
 }
