@@ -9,6 +9,12 @@ export interface TabsConfig {
    * @default "horizontal"
    */
   orientation?: "horizontal" | "vertical";
+
+  /**
+   * The ID of the tab to activate by default.
+   * @default "tab-1"
+   */
+  defaultTabId?: string;
 }
 
 /**
