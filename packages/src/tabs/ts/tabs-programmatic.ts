@@ -12,6 +12,7 @@ export class Tabs implements ITabs {
   private tabContents: HTMLElement[];
   private indicator: HTMLElement | null;
   private orientation: "horizontal" | "vertical";
+  private defaultTabId: string;
 
   /**
    * Creates a new Tabs instance.
@@ -29,6 +30,7 @@ export class Tabs implements ITabs {
     this.tabContents = Array.from(tabGroup.querySelectorAll<HTMLElement>(".tab-content"));
     this.indicator = this.tabList?.querySelector<HTMLElement>(".tab-indicator") || null; // Fallback to null if undefined
     this.orientation = options.orientation || "horizontal";
+    this.defaultTabId = options.defaultTabId || this.tabLinks[0]?.id || "tab1";
 
     this.initialize();
     initializedTabs.add(tabGroup);
@@ -39,9 +41,24 @@ export class Tabs implements ITabs {
    * Initializes the tab group by setting up event listeners and activating the initial tab.
    */
   private initialize(): void {
-    const activeTab = this.tabList?.querySelector<HTMLElement>(".tab-link.active") || this.tabLinks[0];
+    // First check for defaultTabId
+    const defaultTab = this.tabLinks.find(link => link.id === this.defaultTabId);
+    // Then check for an active tab
+    const activeTab = defaultTab || 
+                     this.tabList?.querySelector<HTMLElement>(".tab-link.active") ||
+                     this.tabLinks[0];
+                     
     if (activeTab) {
-      this.activateTab(activeTab.id);
+      // Ensure all other tabs are deactivated first
+      this.tabLinks.forEach((t) => t.classList.remove("active"));
+      this.tabContents.forEach((c) => {
+        c.classList.add("hidden");
+        c.classList.remove("block");
+      });
+      
+      setTimeout(() => {
+        this.activateTab(activeTab.id);
+      }, 300);
     }
 
     this.tabLinks.forEach((link) => {
@@ -85,7 +102,10 @@ export class Tabs implements ITabs {
     const tab = this.tabLinks.find((t) => t.id === tabId);
     const content = this.tabContents.find((c) => c.id === `${tabId}-content`);
 
-    if (!tab || !content) return;
+    if (!tab || !content) {
+      console.warn(`Tab or content with id ${tabId} not found`);
+      return;
+    }
 
     // Deactivate all tabs and contents
     this.tabLinks.forEach((t) => t.classList.remove("active"));
