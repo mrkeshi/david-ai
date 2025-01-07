@@ -21,11 +21,9 @@ export class Accordion implements IAccordion {
       if (content) {
         this.initialized.add(button);
 
-        button.addEventListener('click', () => {
-          this.toggle(button);
-        });
+        button.addEventListener('click', this.toggleHandler);
 
-        const isExpanded = this.options.allOpen || button.getAttribute('aria-expanded') === 'true';
+        const isExpanded = this.options.allOpen || false;
         this.setAccordionState(button, content, isExpanded);
       }
     });
@@ -34,6 +32,7 @@ export class Accordion implements IAccordion {
       this.showAll();
     }
   }
+
 
   private resolveElement(element: HTMLElement | string): HTMLElement | null {
     if (typeof element === 'string') {
@@ -110,11 +109,17 @@ export class Accordion implements IAccordion {
   public cleanup(): void {
     Array.from(this.container.children).forEach((button) => {
       if (button instanceof HTMLElement && this.initialized.has(button)) {
-        button.removeEventListener('click', () => this.toggle(button));
+        button.removeEventListener('click', this.toggleHandler);
         this.initialized.delete(button);
       }
     });
   }
+
+  private toggleHandler = (event: Event): void => {
+    const button = event.currentTarget as HTMLElement;
+    this.toggle(button);
+  };
+
 
   private setAccordionState(
     button: HTMLElement,
