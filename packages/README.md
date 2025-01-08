@@ -96,40 +96,46 @@ This programmatic approach provides:
 - Proper cleanup on unmount
 
 ```tsx
-import { useEffect, useRef } from "react";
 import { Accordion } from "david-ai";
 import type { AccordionConfig, IAccordion } from "david-ai";
 
-const AccordionExample = () => {
-  const accordionContainerRef = useRef<HTMLDivElement>(null);
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("accordion-container");
 
-  useEffect(() => {
-    if (accordionContainerRef.current) {
-      // Define the accordion configuration
-      const config: AccordionConfig = {
-        exclusive: true, // Only one item open at a time
-        allOpen: false, // Do not open all items initially
-      };
+  if (container) {
+    const config: AccordionConfig = {
+      exclusive: true,
+      allOpen: false,
+    };
 
-      // Initialize the Accordion
-      const accordion: IAccordion = new Accordion(
-        accordionContainerRef.current,
-        config
-      );
+    const accordion: IAccordion = new Accordion(container, config);
 
-      // Cleanup on component unmount
-      return () => {
-        accordion.cleanup();
-      };
-    }
-  }, []);
+    // Handle external button controls
+    const showAllButton = document.getElementById("show-all");
+    const hideAllButton = document.getElementById("hide-all");
+    const toggleFirstButton = document.getElementById("toggle-first");
 
-  return (
-    <div ref={accordionContainerRef}>{/* Accordion content goes here */}</div>
-  );
-};
+    showAllButton?.addEventListener("click", () => {
+      accordion.showAll();
+    });
 
-export default AccordionExample;
+    hideAllButton?.addEventListener("click", () => {
+      accordion.hideAll();
+    });
+
+    toggleFirstButton?.addEventListener("click", () => {
+      const firstButton = document.getElementById("button-1") as HTMLElement;
+      if (firstButton) {
+        accordion.toggle(firstButton);
+      }
+    });
+
+    // Cleanup on unmount
+    window.addEventListener("unload", () => {
+      accordion.cleanup();
+    });
+  }
+});
 ```
 
 For detailed usage of each component, check out their respective documentation:
