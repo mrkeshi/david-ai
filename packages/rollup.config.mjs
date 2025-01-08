@@ -2,21 +2,24 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
-
-const inputFile = 'src/index.js'; // Entry file
-const outputDir = 'dist'; // Output directory
-
+import typescript from 'rollup-plugin-typescript2';
+import { resolve as resolveTslib } from 'path'; // Used to resolve tslib paths
 import { readFileSync } from 'fs';
-
 const pkg = JSON.parse(readFileSync('./package.json'));
 
 const copyrightBanner = `
 /*!
- * David AI JavaScript Library v${pkg.version}
+ * David AI JavaScript/TypeScript Library v${pkg.version}
  * (c) ${new Date().getFullYear()} David AI - Creative Tim
  * Released under the MIT License.
+ * Written in TypeScript, usable in both JavaScript and TypeScript projects.
  */
 `;
+
+const tslibPath = resolveTslib('node_modules/tslib/tslib.es6.js');
+
+const inputFile = 'src/index.ts'; // Entry file
+const outputDir = 'dist'; // Output directory
 
 export default [
   // UMD Build (Non-minified)
@@ -33,9 +36,13 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        tslib: tslibPath,
+      }),
       babel({
         babelHelpers: 'bundled',
-        presets: ['@babel/preset-env'],
+        presets: ['@babel/preset-env', '@babel/preset-typescript'],
       }),
     ],
   },
@@ -53,9 +60,13 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        tslib: tslibPath,
+      }),
       babel({
         babelHelpers: 'bundled',
-        presets: ['@babel/preset-env'],
+        presets: ['@babel/preset-env', '@babel/preset-typescript'],
       }),
       terser(), // Minify the output
     ],
@@ -72,9 +83,14 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        tslib: tslibPath,
+        useTsconfigDeclarationDir: true,
+      }),
       babel({
         babelHelpers: 'bundled',
-        presets: ['@babel/preset-env'],
+        presets: ['@babel/preset-env', '@babel/preset-typescript'],
       }),
     ],
   },

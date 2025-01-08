@@ -1,5 +1,40 @@
 # Change Log
 
+## [1.0.6] 2024-12-30
+
+### Added for NPM
+
+- Added TypeScript support for all JavaScript components
+  - Accordion component rewritten in TypeScript
+    - Added AccordionConfig interface and IAccordion interface
+    - Added programmatic Accordion class implementation
+  - Gallery component rewritten in TypeScript
+  - Stepper component rewritten in TypeScript
+    - Added StepperConfig interface and IStepper interface
+    - Added programmatic Stepper class implementation
+  - Popover component rewritten in TypeScript
+    - Added PopoverConfig interface and IPopover interface
+    - Added programmatic Popover class implementation
+  - Tooltip component rewritten in TypeScript
+    - Added TooltipConfig interface and ITooltip interface
+    - Added programmatic Tooltip class implementation
+  - Tabs component rewritten in TypeScript
+    - Added TabsConfig interface and ITabs interface
+    - Added programmatic Tabs class implementation
+  - Modal component rewritten in TypeScript
+    - Added ModalConfig interface and IModal interface
+    - Added programmatic Modal class implementation
+  - Dropdown component rewritten in TypeScript
+    - Added DropdownConfig interface and IDropdown interface
+    - Added programmatic Dropdown class implementation
+  - Collapse component rewritten in TypeScript
+    - Added CollapseConfig interface and ICollapse interface
+    - Added programmatic Collapse class implementation
+  - Alert component rewritten in TypeScript
+  - All future components will be written in TypeScript
+  - Added TypeScript type definitions and interfaces
+  - Improved type safety and developer experience with strict typing
+
 ## [1.0.5] 2024-12-24
 
 ### Added for NPM

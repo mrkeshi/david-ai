@@ -4,29 +4,152 @@
 
 [![David UI Thumb](https://github.com/creativetimofficial/public-assets/blob/master/ct-assets/david-ai.png?raw=true)](https://www.creative-tim.com/david-ui/html/overview)
 
+<div align="center">
+  
+[![npm version](https://img.shields.io/npm/v/david-ai.svg)](https://www.npmjs.com/package/david-ai)
+[![npm downloads](https://img.shields.io/npm/dm/david-ai.svg)](https://www.npmjs.com/package/david-ai)
+
+</div>
+
 ## Table of Contents
 
 - [David UI - Free Tailwind CSS Components Library](#david-ui---free-tailwind-css-components-library)
   - [Table of Contents](#table-of-contents)
-  - [Quick Start](#quick-start)
-    - [Install `david-ai`](#install-david-ai)
+  - [Getting Started](#getting-started)
+    - [Using with CDN](#using-with-cdn)
+    - [Basic Usage NPM](#basic-usage-npm)
+    - [Using with Global Access](#using-with-global-access)
+    - [Typescript](#typescript)
   - [Documentation](#documentation)
   - [Explore Components](#explore-components)
   - [Community](#community)
   - [License](#license)
   - [Contribute \& Feedback](#contribute--feedback)
 
-## Quick Start
+## Getting Started
 
 Learn how to use `david-ai` components to quickly and easily create elegant and flexible pages using Tailwind CSS.
 
 `david-ai` is working with Tailwind CSS classes and you need to have Tailwind CSS installed on your project - <a href="https://tailwindcss.com/docs/installation" target="_blank">Tailwind CSS Installation.</a>
 
-### Install `david-ai`
+### Using with CDN
+
+You can include david-ai via a CDN and initialize alerts globally in the browser. Add the following script to your HTML file:
+
+```html
+<script
+  src="https://cdn.jsdelivr.net/gh/creativetimofficial/david-ai@1.0.6/packages/dist/david-ai.min.js"
+  defer
+></script>
+```
+
+### Basic Usage NPM
 
 ```bash
 npm i david-ai
 ```
+
+After installing, you can use the components in your project across different frameworks:
+
+```tsx
+import { initAlert } from "david-ai";
+
+// Initialize alerts
+initAlert();
+```
+
+### Using with Global Access
+
+If you prefer, you can use the DavidAI global object instead of directly importing initAlert:
+
+```tsx
+import * as DavidAI from "david-ai";
+
+// Initialize alerts
+DavidAI.initAlert();
+```
+
+## TypeScript
+
+David AI components can be used in two ways - through simple ESM imports or programmatically with TypeScript support. Here's how to use both approaches:
+
+### Simple ESM Import
+
+The quickest way to use components is through direct ESM imports:
+
+```tsx
+import { initAlert } from "david-ai";
+
+// Initialize alerts
+initAlert();
+```
+
+### Programmatic Usage with TypeScript
+
+For more control and type safety, you can use the programmatic approach with full TypeScript support:
+
+This programmatic approach provides:
+
+- Full TypeScript support
+- Fine-grained control over component behavior
+- Access to component instance methods
+- Proper cleanup on unmount
+
+```tsx
+import { Accordion } from "david-ai";
+import type { AccordionConfig, IAccordion } from "david-ai";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("accordion-container");
+
+  if (container) {
+    const config: AccordionConfig = {
+      exclusive: true,
+      allOpen: false,
+    };
+
+    const accordion: IAccordion = new Accordion(container, config);
+
+    // Handle external button controls
+    const showAllButton = document.getElementById("show-all");
+    const hideAllButton = document.getElementById("hide-all");
+    const toggleFirstButton = document.getElementById("toggle-first");
+
+    showAllButton?.addEventListener("click", () => {
+      accordion.showAll();
+    });
+
+    hideAllButton?.addEventListener("click", () => {
+      accordion.hideAll();
+    });
+
+    toggleFirstButton?.addEventListener("click", () => {
+      const firstButton = document.getElementById("button-1") as HTMLElement;
+      if (firstButton) {
+        accordion.toggle(firstButton);
+      }
+    });
+
+    // Cleanup on unmount
+    window.addEventListener("unload", () => {
+      accordion.cleanup();
+    });
+  }
+});
+```
+
+For detailed usage of each component, check out their respective documentation:
+
+- [Accordion](https://www.creative-tim.com/david-ui/docs/html/accordion) (ESM & Programmatic)
+- [Alert](https://www.creative-tim.com/david-ui/docs/html/alert) (ESM)
+- [Collapse](https://www.creative-tim.com/david-ui/docs/html/collapse) (ESM & Programmatic)
+- [Dropdown](https://www.creative-tim.com/david-ui/docs/html/dropdown) (ESM & Programmatic)
+- [Gallery](https://www.creative-tim.com/david-ui/docs/html/gallery) (ESM)
+- [Modal](https://www.creative-tim.com/david-ui/docs/html/modal) (ESM & Programmatic)
+- [Popover](https://www.creative-tim.com/david-ui/docs/html/popover) (ESM & Programmatic)
+- [Stepper](https://www.creative-tim.com/david-ui/docs/html/stepper) (ESM & Programmatic)
+- [Tabs](https://www.creative-tim.com/david-ui/docs/html/tabs) (ESM & Programmatic)
+- [Tooltip](https://www.creative-tim.com/david-ui/docs/html/tooltip) (ESM & Programmatic)
 
 Congratulations 🥳, you did it, now you're ready to use `david-ai`.
 
